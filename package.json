@@ -1,0 +1,36 @@
+{
+  "name": "how-many-soldiers",
+  "version": "1.0.0",
+  "description": "A JavaScript Program to find out the amout of soldiers needed for a formation in rows of 7",
+  "main": "src/app/index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --history-api-fallback --inline --progress --mode=development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soulwash/how-many-soldiers.git"
+  },
+  "author": "Niklas Frick",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/soulwash/how-many-soldiers/issues"
+  },
+  "homepage": "https://github.com/soulwash/how-many-soldiers#readme",
+  "dependencies": {
+    "npm": "^6.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.11",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.8.3",
+    "sass-loader": "^7.0.1",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15",
+    "webpack-dev-server": "^3.1.3"
+  }
+}
