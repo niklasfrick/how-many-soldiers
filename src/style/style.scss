@@ -1,5 +1,23 @@
 $primary-color: #2e878a;
+$primary-font: Helvetica;
 
 body {
 	color: $primary-color;
+	font-family: $primary-font;
+}
+
+#container {
+	display: inline-block;
+    width: 100%;
+    position: relative;
+}
+#animation {
+    position: absolute;
+    float: left;
+}
+
+.soldier {
+	width: 100px;
+	height: 100px;
+	position: absolute;
 }
