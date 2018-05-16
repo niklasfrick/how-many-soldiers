@@ -39,7 +39,15 @@ function placeSoldiers(amount) {
 
 window.onload = placeSoldiers(7)
 
-function moveSoldierRight(distance) {
+function removeSoldiers() {
+	let animationDiv = document.getElementById("animation")
+	while (animationDiv.firstChild) {
+		animationDiv.removeChild(animationDiv.firstChild)
+	}
+}
+
+function moveSoldiersRight(distance) {
+	isPaused = true
     let elem = document.getElementById("animation") 
     let posx = 0
 
@@ -47,6 +55,7 @@ function moveSoldierRight(distance) {
     function frame() {
         if (posx == distance) {
             clearInterval(id)
+            return isPaused = false
         } else {
             posx++
             elem.style.left = posx + 'px'
@@ -54,7 +63,7 @@ function moveSoldierRight(distance) {
     }
 }
 
-function moveSoldierDown(distance) {
+function moveSoldiersDown(distance) {
 	let elem = document.getElementById("animation")
 	let posy = 0
 
@@ -74,9 +83,15 @@ let distanceY = 400
 console.log(distanceX)
 console.log(distanceY)
 
-function animateSoldier() {
-	moveSoldierRight(distanceX)
-	moveSoldierDown(distanceY)
+function animateSoldiers() {
+	let isPaused = true
+	moveSoldiersRight(distanceX)
+
+	if (isPaused) {
+		setTimeout(function(){waitForIt()},100)
+	} else {
+		moveSoldiersDown(distanceY)
+	}
 }
 
-window.onload = animateSoldier()
+window.onload = animateSoldiers()

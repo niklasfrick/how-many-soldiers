@@ -13,11 +13,13 @@ body {
 }
 #animation {
     position: absolute;
-    float: left;
 }
 
 .soldier {
-	width: 100px;
-	height: 100px;
-	position: absolute;
+	width: 80px;
+	height: 80px;
+}
+
+.soldier img {
+	float: left;
 }
