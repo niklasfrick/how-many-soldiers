@@ -4,7 +4,7 @@ import '../style/style.scss'
 // Math Part
 //
 
-function checkSolution(checkNumber) {
+function solutionIsCorrect(checkNumber) {
 	if ((checkNumber % 2 == 1) && (checkNumber % 3 == 1) && (checkNumber % 4 == 1) && (checkNumber % 5 == 1) && (checkNumber % 6 == 1) && (checkNumber % 7 == 0)) {
 		return true
 	} else {
@@ -12,86 +12,117 @@ function checkSolution(checkNumber) {
 	}
 }
 
-let i = 7
-let check = checkSolution(i)
+// let i = 1
+// let check = checkSolution(i)
 
-while (!check) {
-	if (checkSolution(i)) {
-		console.log("Loesung: " + i)
-	} 
-	check = checkSolution(i)	
-	i = i + 7
-}
+// while (!check) {
+// 	if (checkSolution(i)) {
+// 		console.log("Loesung: " + i)
+// 	} 
+// 	check = checkSolution(i)	
+// 	i = i + 1
+// }
 
 //
 // Animation Part
 //
 
-function placeSoldiers(amount) {
+// let isPaused = false
+
+function placeSoldiers(amount, lineup, div) {
 	let i
+	let k
+
 	for(i = 0; i < amount; i++) {
-		let elem = document.createElement("img")
-		elem.setAttribute("src", "assets/img/soldier.png")
-		elem.setAttribute("class", "soldier")
-		document.getElementById("animation").appendChild(elem)
+		// create a div with column size 2 for the soldier's row
+		let soldierDiv = document.createElement("div")
+		soldierDiv.id = "soldierLine-" + i
+		soldierDiv.className = "col-" + lineup
+		document.getElementById(div).appendChild(soldierDiv)
+		
+		// creating 2 new soldiers and add it to the according div
+		k = 0
+		while(k < lineup) {
+			let soldierImg = document.createElement("img")
+			soldierImg.setAttribute("src", "assets/img/soldier.png")
+			soldierImg.setAttribute("class", "soldier")
+			document.getElementById("soldierLine-" + i).appendChild(soldierImg)
+			k++
+		}
 	}
 } 
 
-window.onload = placeSoldiers(7)
-
-function removeSoldiers() {
-	let animationDiv = document.getElementById("animation")
-	while (animationDiv.firstChild) {
-		animationDiv.removeChild(animationDiv.firstChild)
-	}
+function getFullNumbers(tryAmount, rowsOf) {
+	return Math.floor(tryAmount/rowsOf)
 }
 
-function moveSoldiersRight(distance) {
-	isPaused = true
-    let elem = document.getElementById("animation") 
-    let posx = 0
-
-    let id = setInterval(frame, 10)
-    function frame() {
-        if (posx == distance) {
-            clearInterval(id)
-            return isPaused = false
-        } else {
-            posx++
-            elem.style.left = posx + 'px'
-        }
-    }
+function getRemainder(tryAmount, rowsOf) {
+	return tryAmount % rowsOf
 }
 
-function moveSoldiersDown(distance) {
-	let elem = document.getElementById("animation")
-	let posy = 0
-
-	let id = setInterval(frame, 10)
-	function frame() {
-		if (posy == distance) {
-			clearInterval(id)
-		} else {
-			posy++
-			elem.style.top = posy + 'px'
-		}
-	}
+function tryToSoldiersRows(userInputTry, userInputRows) {
+	let fullSoldiers = userInputTry - getRemainder(userInputTry, userInputRows)
+	placeSoldiers(fullSoldiers, userInputRows, "fullSoldiers")
 }
 
-let distanceX = ((document.getElementById("container").clientWidth) - document.getElementById("animation").clientWidth) / 2
-let distanceY = 400
-console.log(distanceX)
-console.log(distanceY)
+document.addEventListener('DOMContentLoaded', function() {
+	let userInput = 33
+	tryToSoldiersRows(userInput, 2)
+  }, false);
 
-function animateSoldiers() {
-	let isPaused = true
-	moveSoldiersRight(distanceX)
+// function removeSoldiers() {
+// 	let animationDiv = document.getElementById("animation")
+// 	while (animationDiv.firstChild) {
+// 		animationDiv.removeChild(animationDiv.firstChild)
+// 	}
+// }
 
-	if (isPaused) {
-		setTimeout(function(){waitForIt()},100)
-	} else {
-		moveSoldiersDown(distanceY)
-	}
-}
+// function moveSoldiersRight(distance) {
+// 	isPaused = true
+//     let elem = document.getElementById("animation") 
+//     let posx = 0
 
-window.onload = animateSoldiers()
+//     let id = setInterval(frame, 10)
+//     function frame() {
+//         if (posx == distance) {
+//             clearInterval(id)
+//             return isPaused = false
+//         } else {
+//             posx++
+//             elem.style.left = posx + 'px'
+//         }
+//     }
+// }
+
+// function moveSoldiersDown(distance) {
+// 	let elem = document.getElementById("animation")
+// 	let posy = 0
+
+// 	let id = setInterval(frame, 10)
+// 	function frame() {
+// 		if (posy == distance) {
+// 			clearInterval(id)
+// 			return isPaused = true
+// 		} else {
+// 			posy++
+// 			elem.style.top = posy + 'px'
+// 		}
+// 	}
+// }
+
+// let distanceX = ((document.getElementById("container").clientWidth) - document.getElementById("animation").clientWidth) / 2
+// let distanceY = 400
+// console.log(distanceX)
+// console.log(distanceY)
+
+// function animateSoldiers() {
+// 	moveSoldiersRight(distanceX)
+
+// 	if (isPaused) {
+// 		setTimeout(function(){moveSoldiersDown()},3000)
+// 	} else {
+// 		moveSoldiersDown(distanceY)
+// 	}
+// }
+
+// window.onload = animateSoldiers()

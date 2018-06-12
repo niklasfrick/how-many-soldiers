@@ -1,23 +1,12 @@
-$primary-color: #2e878a;
-$primary-font: Helvetica;
+@import "simple-grid.scss";
 
-body {
-	color: $primary-color;
-	font-family: $primary-font;
-}
-
-#container {
-	display: inline-block;
-    width: 100%;
-    position: relative;
-}
 #animation {
     position: absolute;
 }
 
 .soldier {
-	width: 80px;
-	height: 80px;
+	width: 50px;
+	height: 50px;
 }
 
 .soldier img {
