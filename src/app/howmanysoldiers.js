@@ -2,6 +2,7 @@ import swal from 'sweetalert'
 
 // initialize global variable for current try and update display
 var currentNumber = 0
+updateCurrentNumber(currentNumber)
 
 // function for validating a possible solution
 function solutionIsCorrect(checkNumber) {
@@ -35,6 +36,12 @@ function updateCurrentNumber(newNumber) {
 window.reset = function reset() {
 	currentNumber = 0
 	document.getElementById("currentNumber").innerHTML = currentNumber
+	document.getElementById("rowoftwo").innerHTML = ""
+	document.getElementById("rowofthree").innerHTML = ""
+	document.getElementById("rowoffour").innerHTML = ""
+	document.getElementById("rowoffive").innerHTML = ""
+	document.getElementById("rowofsix").innerHTML = ""
+	document.getElementById("rowofseven").innerHTML = ""
 }
 
 // function for validation when the user is guessing via the input
@@ -48,18 +55,17 @@ window.tryInput = function tryInput() {
 			button: "Okay"
 		})
 	} else if (isPositiveInteger(userInput)) {
-		currentNumber = userInput
-		updateCurrentNumber(currentNumber)
-		if(solutionIsCorrect(userInput)) {
+		updateCurrentNumber(userInput)
+		if(solutionIsCorrect(currentNumber)) {
 			swal({
-				title: "Correct!",
+				title: `${currentNumber} is Correct!`,
 				text: "You have guessed the correct solution!",
 				icon: "success",
 				button: "Wohoo!"
 			});
 		} else {
 			swal({
-				title: "Wrong!",
+				title: `${currentNumber} is Wrong!`,
 				text: "Sorry, that was wrong. Try guessing again!",
 				icon: "error",
 				button: "Okay..."
@@ -80,21 +86,43 @@ window.guess = function guess(operation) {
 	switch(operation) {
 		case "a1":
 			// adding 1
-			currentNumber++
-			updateCurrentNumber(currentNumber)
+			updateCurrentNumber(currentNumber + 1)
+			placeSoldiers(currentNumber, 2)
+			if (solutionIsCorrect(currentNumber)) {
+				swal({
+					title: `${currentNumber} is Correct!`,
+					text: "You have guessed the correct solution!",
+					icon: "success",
+					button: "Wohoo!"
+				})
+			}
 			break
 		case "a7":
 			// adding 7
-			currentNumber += 7
-			updateCurrentNumber(currentNumber)
+			updateCurrentNumber(currentNumber + 7)
+			if (solutionIsCorrect(currentNumber)) {
+				swal({
+					title: `${currentNumber} is Correct!`,
+					text: "You have guessed the correct solution!",
+					icon: "success",
+					button: "Wohoo!"
+				})
+			}
 			break
 		case "s1":
 			// subtracting 1
 			if (currentNumber - 1 <= 0) {
 				updateCurrentNumber(0)
-			} else {	
-				currentNumber--
-				updateCurrentNumber(currentNumber)
+			} else {
+				updateCurrentNumber(currentNumber - 1)
+				if (solutionIsCorrect(currentNumber)) {
+					swal({
+						title: `${currentNumber} is Correct!`,
+						text: "You have guessed the correct solution!",
+						icon: "success",
+						button: "Wohoo!"
+					})
+				}
 			}
 			break
 		case "s7":
@@ -102,9 +130,64 @@ window.guess = function guess(operation) {
 			if (currentNumber - 7 <= 0) {
 				updateCurrentNumber(0)
 			} else {
-				currentNumber -= 7
-				updateCurrentNumber(currentNumber)
+				updateCurrentNumber(currentNumber - 7)
+				if (solutionIsCorrect(currentNumber)) {
+					swal({
+						title: `${currentNumber} is Correct!`,
+						text: "You have guessed the correct solution!",
+						icon: "success",
+						button: "Wohoo!"
+					})
+				}
 			}
+			break
+	}
+}
+
+// function for completing the riddle to the closest solution
+
+// function for completing the riddle to the smallest possible solution
+
+function placeSoldiers(amount, lineup) {
+	let rowsAmount
+	let i
+	let k
+
+	switch(lineup) {
+		case 2:
+			document.getElementById("rowoftwo").innerHTML = ""
+			rowsAmount = Math.round(amount / 2)
+
+			for(i = 0; i < rowsAmount; i++) {
+				let rowDiv = document.createElement("div")
+				rowDiv.id = "soldierRow-" + i
+				document.getElementById("rowoftwo").appendChild(rowDiv)
+				
+				k = 0
+				while (k < 2) {
+					let soldierImg = document.createElement("img")
+					soldierImg.setAttribute("src", "assets/img/soldier.png")
+					soldierImg.setAttribute("class", "soldier")
+					document.getElementById("soldierRow-" + i).appendChild(soldierImg)
+					k++
+				}
+			}
+			
+			break
+		case 3:
+
+			break
+		case 4:
+
+			break
+		case 5:
+
+			break
+		case 6:
+
+			break
+		case 7:
+
 			break
 	}
 }
