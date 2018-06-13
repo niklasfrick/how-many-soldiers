@@ -8,11 +8,71 @@
 		<div class="row">
 			<div class="col-12">
 				<h1>How many Soldiers?</h1>
-				<h2>Currently trying with 7 Soldiers</h2>
+			</div>
+			<div class="col-4">
+				<h4>Try to solve the following riddle:</h4>
+				<p>Soldiers must line up in rows of two. After the line-up, one soldier remains. Even when competing in rows of three, four, five and six, one soldier remains. Only when they line up in rows of seven, there is no soldier left. The minimum number of soldiers needed must be determined.</p>
+			</div>
+			<div class="col-4">
+				<h4>Controls for Guessing the Solution</h4>
+				<p>Try with a number:</p>
+				<input type="text" placeholder="Enter a number to guess..." id="userInput"></input><button class="btn" onClick="tryInput()">Try</button><button class="btn" onClick="reset()">Reset</button>
+				<p>Add & Subtract</p>
+				<div class="btn-group">
+					<button class="button" onClick="guess('s1')">Subtract -1</button>
+					<button class="button" onClick="guess('s7')">Subtract -7</button>
+					<button class="button" onClick="guess('a1')">Add +1</button>
+					<button class="button" onClick="guess('a7')">Add +7</button>
+				</div>
+			</div>
+			<div class="col-4">
+				<h4>Status & Help</h4>
+				<p>Currently trying with: <br><strong id="currentNumber">0</strong></p>
+				<p>Solve options:</p>
+				<div class="btn-group">
+					<button class="button">Next Possible Solution</button>
+					<button class="button">Lowest Possible Solution</button>
+				</div>
 			</div>
 		</div>
-		<div class="row" id="fullSoldiers"></div>
-		<div class="row" id="remainderSoldiers"></div>
+		<div class="row">
+			<div class="col-12">
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-2 bg-passed">
+				<h5 class="center">Row of 2</h5>
+			</div>
+			<div class="col-2 bg-failed">
+				<h5 class="center">Row of 3</h5>
+			</div>
+			<div class="col-2">
+				<h5 class="center">Row of 4</h5>
+			</div>
+			<div class="col-2">
+				<h5 class="center">Row of 5</h5>
+			</div>
+			<div class="col-2">
+				<h5 class="center">Row of 6</h5>
+			</div>
+			<div class="col-2">
+				<h5 class="center">Row of 7</h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-2" id="rowoftwo"></div>
+			<div class="col-2" id="rowofthree"></div>
+			<div class="col-2" id="rowoffour"></div>
+			<div class="col-2" id="rowoffive"></div>
+			<div class="col-2" id="rowofsix"></div>
+			<div class="col-2" id="rowofseven"></div>
+		</div>
 	</div>
 </body>
 </html>

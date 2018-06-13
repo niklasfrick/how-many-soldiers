@@ -1,16 +1,5 @@
 import '../style/style.scss'
-
-//
-// Math Part
-//
-
-function solutionIsCorrect(checkNumber) {
-	if ((checkNumber % 2 == 1) && (checkNumber % 3 == 1) && (checkNumber % 4 == 1) && (checkNumber % 5 == 1) && (checkNumber % 6 == 1) && (checkNumber % 7 == 0)) {
-		return true
-	} else {
-		return false
-	}
-}
+import './howmanysoldiers.js'
 
 // let i = 1
 // let check = checkSolution(i)
@@ -23,52 +12,48 @@ function solutionIsCorrect(checkNumber) {
 // 	i = i + 1
 // }
 
-//
-// Animation Part
-//
-
 // let isPaused = false
 
-function placeSoldiers(amount, lineup, div) {
-	let i
-	let k
+// function placeSoldiers(amount, lineup, div) {
+// 	let i
+// 	let k
 
-	for(i = 0; i < amount; i++) {
-		// create a div with column size 2 for the soldier's row
-		let soldierDiv = document.createElement("div")
-		soldierDiv.id = "soldierLine-" + i
-		soldierDiv.className = "col-" + lineup
-		document.getElementById(div).appendChild(soldierDiv)
+// 	for(i = 0; i < amount; i++) {
+// 		// create a div with column size 2 for the soldier's row
+// 		let soldierDiv = document.createElement("div")
+// 		soldierDiv.id = "soldierLine-" + i
+// 		soldierDiv.className = "col-" + lineup
+// 		document.getElementById(div).appendChild(soldierDiv)
 		
-		// creating 2 new soldiers and add it to the according div
-		k = 0
-		while(k < lineup) {
-			let soldierImg = document.createElement("img")
-			soldierImg.setAttribute("src", "assets/img/soldier.png")
-			soldierImg.setAttribute("class", "soldier")
-			document.getElementById("soldierLine-" + i).appendChild(soldierImg)
-			k++
-		}
-	}
-} 
+// 		// creating 2 new soldiers and add it to the according div
+// 		k = 0
+// 		while(k < lineup) {
+// 			let soldierImg = document.createElement("img")
+// 			soldierImg.setAttribute("src", "assets/img/soldier.png")
+// 			soldierImg.setAttribute("class", "soldier")
+// 			document.getElementById("soldierLine-" + i).appendChild(soldierImg)
+// 			k++
+// 		}
+// 	}
+// } 
 
-function getFullNumbers(tryAmount, rowsOf) {
-	return Math.floor(tryAmount/rowsOf)
-}
+// function getFullNumbers(tryAmount, rowsOf) {
+// 	return Math.floor(tryAmount/rowsOf)
+// }
 
-function getRemainder(tryAmount, rowsOf) {
-	return tryAmount % rowsOf
-}
+// function getRemainder(tryAmount, rowsOf) {
+// 	return tryAmount % rowsOf
+// }
 
-function tryToSoldiersRows(userInputTry, userInputRows) {
-	let fullSoldiers = userInputTry - getRemainder(userInputTry, userInputRows)
-	placeSoldiers(fullSoldiers, userInputRows, "fullSoldiers")
-}
+// function tryToSoldiersRows(userInputTry, userInputRows) {
+// 	let fullSoldiers = userInputTry - getRemainder(userInputTry, userInputRows)
+// 	placeSoldiers(fullSoldiers, userInputRows, "fullSoldiers")
+// }
 
-document.addEventListener('DOMContentLoaded', function() {
-	let userInput = 33
-	tryToSoldiersRows(userInput, 2)
-  }, false);
+// document.addEventListener('DOMContentLoaded', function() {
+// 	let userInput = 33
+// 	tryToSoldiersRows(userInput, 2)
+//   }, false);
 
 // function removeSoldiers() {
 // 	let animationDiv = document.getElementById("animation")

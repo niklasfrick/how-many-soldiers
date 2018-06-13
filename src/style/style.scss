@@ -1,9 +1,5 @@
 @import "simple-grid.scss";
 
-#animation {
-    position: absolute;
-}
-
 .soldier {
 	width: 50px;
 	height: 50px;
@@ -11,4 +7,63 @@
 
 .soldier img {
 	float: left;
+}
+
+.bg-passed {
+	background-color: #2ecc71;
+	border-radius: 10px;
+}
+
+.bg-failed {
+	background-color: #e74c3c;
+	border-radius: 10px;
+}
+
+.btn-group .button {
+    background-color: $light-gray;
+	border-radius: 10px;
+    color: white;
+	padding: 10px 20px;
+	margin: 1px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+}
+
+.btn-group .button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+
+.btn-group .button:hover {
+    background-color: $dark-gray;
+}
+
+input[type=text] {
+	padding:10px; border:2px solid #ccc; 
+	-webkit-border-radius: 5px;
+	border-radius: 8px;
+}
+
+input[type=text]:focus {
+	border-color:#333; 
+}
+
+.btn {
+	background-color: $light-gray;
+	border-radius: 8px;
+    color: white;
+	padding: 7px 15px;
+	margin: 1px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: $dark-gray;
 }
