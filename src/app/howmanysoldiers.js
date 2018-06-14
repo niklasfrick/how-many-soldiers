@@ -50,13 +50,14 @@ window.tryInput = function tryInput() {
 		})
 	} else if (isPositiveInteger(userInput)) {
 		updateCurrentNumber(userInput)
+		placeSoldiers(currentNumber, 2)
 		if(solutionIsCorrect(currentNumber)) {
 			swal({
 				title: `${currentNumber} is Correct!`,
 				text: "You have guessed the correct solution!",
 				icon: "success",
 				button: "Wohoo!"
-			});
+			})
 		} else {
 			swal({
 				title: `${currentNumber} is Wrong!`,
@@ -141,9 +142,56 @@ window.guess = function guess(operation) {
 	}
 }
 
-// function for completing the riddle to the closest solution
+// function for completing the riddle to the next higher or smaller solution
+window.nextsolution = function nextHigherSolution(option) {
+	let placeholderNumber
+	switch(option) {
+		case "higher":
+			placeholderNumber = currentNumber + 1
+			while (!solutionIsCorrect(placeholderNumber)) {
+				placeholderNumber++
+			}
+			if (solutionIsCorrect(placeholderNumber)) {
+				updateCurrentNumber(placeholderNumber)
+				placeSoldiers(currentNumber, 2)
+				swal({
+					title: `${currentNumber} is Correct!`,
+					text: "A new solution has been found!",
+					icon: "success",
+					button: "Wohoo!"
+				})
+			}
+			break
 
-// function for completing the riddle to the smallest possible solution
+		case "smaller":
+			placeholderNumber = currentNumber - 1
+			if (placeholderNumber != 301) {
+				updateCurrentNumber(301)
+				placeSoldiers(currentNumber, 2)
+				swal({
+					title: "You reached the end!",
+					text: "Smallest possible solution has been reached, please increase the number from now on!",
+					icon: "info",
+					button: "Okay"
+				})
+			} else {
+				while (!solutionIsCorrect(placeholderNumber)) {
+					placeholderNumber--
+				}
+				if (solutionIsCorrect(placeholderNumber)) {
+					updateCurrentNumber(placeholderNumber)
+					placeSoldiers(currentNumber, 2)
+					swal({
+						title: `${currentNumber} is Correct!`,
+						text: "A new solution has been found!",
+						icon: "success",
+						button: "Wohoo!"
+					})
+				}
+			}
+			break
+		}
+} 
 
 // function to place the soldiers in the rows of 2 to 7
 function placeSoldiers(amount, lineup) {
@@ -168,8 +216,11 @@ function placeSoldiers(amount, lineup) {
 				if (document.getElementById("remainderSoldierRowOfTwo") !== null) {
 					document.getElementById("remainderSoldierRowOfTwo").remove()
 				}
-				document.getElementById("divrowoftwo").classList.remove("bg-failed")
-				document.getElementById("divrowoftwo").classList.add("bg-passed")
+				if (document.getElementById("divrowoftwo").classList.contains("bg-failed")) {
+					document.getElementById("divrowoftwo").classList.replace("bg-failed", "bg-passed")
+				} else {
+					document.getElementById("divrowoftwo").classList.add("bg-passed")
+				}
 
 				// add the remainder soldier to the "row of two" div
 				let remainderSoldierImg = document.createElement("img")
@@ -180,8 +231,15 @@ function placeSoldiers(amount, lineup) {
 
 			} else {
 				// remove the remainder soldier again and set the background of the div to failed
-				document.getElementById("remainderSoldierRowOfTwo").remove()
-				document.getElementById("divrowoftwo").classList.replace("bg-passed", "bg-failed")
+				if (document.getElementById("remainderSoldierRowOfTwo") !== null) {
+					document.getElementById("remainderSoldierRowOfTwo").remove()
+				}
+				if (document.getElementById("divrowoftwo").classList.contains("bg-passed")) {
+					document.getElementById("divrowoftwo").classList.replace("bg-passed", "bg-failed")
+				} else {
+					document.getElementById("divrowoftwo").classList.add("bg-failed")
+				}
+				
 			}
 
 			// create a div for each row
@@ -219,9 +277,12 @@ function placeSoldiers(amount, lineup) {
 				if (document.getElementById("remainderSoldierRowOfThree") !== null) {
 					document.getElementById("remainderSoldierRowOfThree").remove()
 				}
-				document.getElementById("divrowofthree").classList.remove("bg-failed")
-				document.getElementById("divrowofthree").classList.add("bg-passed")
-
+				if (document.getElementById("divrowofthree").classList.contains("bg-failed")) {
+					document.getElementById("divrowofthree").classList.replace("bg-failed", "bg-passed")
+				} else {
+					document.getElementById("divrowofthree").classList.add("bg-passed")
+				}
+				
 				// add the remainder soldier to the "row of three" div
 				let remainderSoldierImg = document.createElement("img")
 				remainderSoldierImg.setAttribute("src", "assets/img/soldier.png")
@@ -231,11 +292,21 @@ function placeSoldiers(amount, lineup) {
 
 			} else if(document.getElementById("remainderSoldierRowOfThree") == null) {
 				// if the remainder soldier does not exist, set the background of the div to failed
-				document.getElementById("divrowofthree").classList.replace("bg-passed", "bg-failed")
+				if (document.getElementById("divrowofthree").classList.contains("bg-passed")) {
+					document.getElementById("divrowofthree").classList.replace("bg-passed", "bg-failed")
+				} else {
+					document.getElementById("divrowofthree").classList.add("bg-failed")
+				}
 			} else {
 				// remove the remaining soldier if he exists and set the background of the div to failed
-				document.getElementById("remainderSoldierRowOfThree").remove()
-				document.getElementById("divrowofthree").classList.replace("bg-passed", "bg-failed")
+				if (document.getElementById("remainderSoldierRowOfThree").innerHTML !== null) {
+					document.getElementById("remainderSoldierRowOfThree").remove()
+				}
+				if (document.getElementById("divrowofthree").classList.contains("bg-passed")) {
+					document.getElementById("divrowofthree").classList.replace("bg-passed", "bg-failed")
+				} else {
+					document.getElementById("divrowofthree").classList.add("bg-failed")
+				}
 			}
 
 			// create a div for each row
@@ -273,8 +344,11 @@ function placeSoldiers(amount, lineup) {
 				if (document.getElementById("remainderSoldierRowOfFour") !== null) {
 					document.getElementById("remainderSoldierRowOfFour").remove()
 				}
-				document.getElementById("divrowoffour").classList.remove("bg-failed")
-				document.getElementById("divrowoffour").classList.add("bg-passed")
+				if (document.getElementById("divrowoffour").classList.contains("bg-failed")) {
+					document.getElementById("divrowoffour").classList.replace("bg-failed", "bg-passed")
+				} else {
+					document.getElementById("divrowoffour").classList.add("bg-passed")
+				}
 
 				// add the remainder soldier to the "row of four" div
 				let remainderSoldierImg = document.createElement("img")
@@ -285,11 +359,22 @@ function placeSoldiers(amount, lineup) {
 
 			} else if(document.getElementById("remainderSoldierRowOfFour") == null) {
 				// if the remainder soldier does not exist, set the background of the div to failed
-				document.getElementById("divrowoffour").classList.replace("bg-passed", "bg-failed")
+				if (document.getElementById("divrowoffour").classList.contains("bg-passed")) {
+					document.getElementById("divrowoffour").classList.replace("bg-passed", "bg-failed")
+				} else {
+					document.getElementById("divrowoffour").classList.add("bg-failed")
+				}
+				
 			} else {
 				// remove the remaining soldier if he exists and set the background of the div to failed
-				document.getElementById("remainderSoldierRowOfFour").remove()
-				document.getElementById("divrowoffour").classList.replace("bg-passed", "bg-failed")
+				if (document.getElementById("remainderSoldierRowOfFour").innerHTML !== null) {
+					document.getElementById("remainderSoldierRowOfFour").remove()
+				}
+				if (document.getElementById("divrowoffour").classList.contains("bg-passed")) {
+					document.getElementById("divrowoffour").classList.replace("bg-passed", "bg-failed")
+				} else {
+					document.getElementById("divrowoffour").classList.add("bg-failed")
+				}
 			}
 
 			// create a div for each row
@@ -327,8 +412,11 @@ function placeSoldiers(amount, lineup) {
 				if (document.getElementById("remainderSoldierRowOfFive") !== null) {
 					document.getElementById("remainderSoldierRowOfFive").remove()
 				}
-				document.getElementById("divrowoffive").classList.remove("bg-failed")
-				document.getElementById("divrowoffive").classList.add("bg-passed")
+				if (document.getElementById("divrowoffive").classList.contains("bg-failed")) {
+					document.getElementById("divrowoffive").classList.replace("bg-failed", "bg-passed")
+				} else {
+					document.getElementById("divrowoffive").classList.add("bg-passed")
+				}
 
 				// add the remainder soldier to the "row of five" div
 				let remainderSoldierImg = document.createElement("img")
@@ -339,11 +427,21 @@ function placeSoldiers(amount, lineup) {
 
 			} else if(document.getElementById("remainderSoldierRowOfFive") == null) {
 				// if the remainder soldier does not exist, set the background of the div to failed
-				document.getElementById("divrowoffive").classList.replace("bg-passed", "bg-failed")
+				if (document.getElementById("divrowoffive").classList.contains("bg-passed")) {
+					document.getElementById("divrowoffive").classList.replace("bg-passed", "bg-failed")
+				} else {
+					document.getElementById("divrowoffive").classList.add("bg-failed")
+				}
 			} else {
 				// remove the remaining soldier if he exists and set the background of the div to failed
-				document.getElementById("remainderSoldierRowOfFive").remove()
-				document.getElementById("divrowoffive").classList.replace("bg-passed", "bg-failed")
+				if (document.getElementById("remainderSoldierRowOfFive").innerHTML !== null) {
+					document.getElementById("remainderSoldierRowOfFive").remove()
+				}
+				if (document.getElementById("divrowoffive").classList.contains("bg-passed")) {
+					document.getElementById("divrowoffive").classList.replace("bg-passed", "bg-failed")
+				} else {
+					document.getElementById("divrowoffive").classList.add("bg-failed")
+				}
 			}
 
 			// create a div for each row
@@ -381,8 +479,11 @@ function placeSoldiers(amount, lineup) {
 				if (document.getElementById("remainderSoldierRowOfSix") !== null) {
 					document.getElementById("remainderSoldierRowOfSix").remove()
 				}
-				document.getElementById("divrowofsix").classList.remove("bg-failed")
-				document.getElementById("divrowofsix").classList.add("bg-passed")
+				if (document.getElementById("divrowofsix").classList.contains("bg-failed")) {
+					document.getElementById("divrowofsix").classList.replace("bg-failed", "bg-passed")
+				} else {
+					document.getElementById("divrowofsix").classList.add("bg-passed")
+				}
 
 				// add the remainder soldier to the "row of six" div
 				let remainderSoldierImg = document.createElement("img")
@@ -393,11 +494,22 @@ function placeSoldiers(amount, lineup) {
 
 			} else if(document.getElementById("remainderSoldierRowOfSix") == null) {
 				// if the remainder soldier does not exist, set the background of the div to failed
-				document.getElementById("divrowofsix").classList.replace("bg-passed", "bg-failed")
+				if (document.getElementById("divrowofsix").classList.contains("bg-passed")) {
+					document.getElementById("divrowofsix").classList.replace("bg-passed", "bg-failed")
+				} else {
+					document.getElementById("divrowofsix").classList.add("bg-failed")
+				}
+				
 			} else {
 				// remove the remaining soldier if he exists and set the background of the div to failed
-				document.getElementById("remainderSoldierRowOfSix").remove()
-				document.getElementById("divrowofsix").classList.replace("bg-passed", "bg-failed")
+				if (document.getElementById("remainderSoldierRowOfSix").innerHTML !== null) {
+					document.getElementById("remainderSoldierRowOfSix").remove()
+				}
+				if (document.getElementById("divrowofsix").classList.contains("bg-passed")) {
+					document.getElementById("divrowofsix").classList.replace("bg-passed", "bg-failed")
+				} else {
+					document.getElementById("divrowofsix").classList.add("bg-failed")
+				}
 			}
 
 			// create a div for each row
@@ -430,12 +542,18 @@ function placeSoldiers(amount, lineup) {
 
 			// if the remainder is 0 set the "row of seven" div to passed, if not set to failed
 			if (remainder == 0) {
-				document.getElementById("divrowofseven").classList.remove("bg-failed")
-				document.getElementById("divrowofseven").classList.add("bg-passed")
+				if (document.getElementById("divrowofseven").classList.contains("bg-failed")) {
+					document.getElementById("divrowofseven").classList.replace("bg-failed", "bg-passed")
+				} else {
+					document.getElementById("divrowofseven").classList.add("bg-passed")
+				}
 			
 			} else {
-				document.getElementById("divrowofseven").classList.remove("bg-passed")
-				document.getElementById("divrowofseven").classList.add("bg-failed")	
+				if (document.getElementById("divrowofseven").classList.contains("bg-passed")) {
+					document.getElementById("divrowofseven").classList.replace("bg-passed", "bg-failed")
+				} else {
+					document.getElementById("divrowofseven").classList.add("bg-failed")	
+				}
 			}
 
 			// create a div for each row
