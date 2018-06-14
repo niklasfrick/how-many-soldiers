@@ -1,4 +1,4 @@
-# How many Soldiers
+# How many Soldiers?
 
 A JavaScript Program to find out the amout of soldiers needed for a formation in rows of 7
 
