@@ -165,7 +165,7 @@ window.nextsolution = function nextHigherSolution(option) {
 
 		case "smaller":
 			placeholderNumber = currentNumber - 1
-			if (placeholderNumber != 301) {
+			if (placeholderNumber <= 301) {
 				updateCurrentNumber(301)
 				placeSoldiers(currentNumber, 2)
 				swal({
