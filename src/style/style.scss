@@ -1,8 +1,8 @@
 @import "simple-grid.scss";
 
 .soldier {
-	width: 50px;
-	height: 50px;
+	max-width: 30px;
+	max-height: 30px;
 }
 
 .soldier img {
