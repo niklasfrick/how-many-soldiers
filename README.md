@@ -8,7 +8,17 @@ Even when competing in rows of three, four, five and six, one soldier remains.
 Only when they line up in rows of seven, there is no soldier left. 
 The minimum number of soldiers needed must be determined.
 
-## Dev environment setup
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development purposes. The project is not yet production-ready.
+
+### Prerequisites
+
+What things you need to install the software
+
+* [node.js](https://nodejs.org/en/) - ode.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+
+### Dev environment setup
 
 1. clone repo & cd into it
 
