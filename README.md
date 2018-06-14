@@ -16,7 +16,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software
 
-* [node.js](https://nodejs.org/en/) - ode.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+* [node.js](https://nodejs.org/en/) - node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
 
 ### Dev environment setup
 
