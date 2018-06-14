@@ -49,6 +49,7 @@ window.tryInput = function tryInput() {
 			button: "Okay"
 		})
 	} else if (isPositiveInteger(userInput)) {
+		// convert the input to a number - workaround
 		userInput = Number(userInput)
 		updateCurrentNumber(userInput)
 		placeSoldiers(currentNumber, 2)
