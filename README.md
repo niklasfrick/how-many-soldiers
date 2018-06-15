@@ -42,6 +42,10 @@ npm run dev
 http://localhost:4000
 ```
 
+### To-Dos
+
+* Make production-ready for deployment
+
 ## Built With
 
 * [Webpack](https://github.com/webpack/webpack) - A module bundler.
