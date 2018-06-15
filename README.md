@@ -44,5 +44,7 @@ http://localhost:4000
 
 ## Built With
 
+* [Webpack](https://github.com/webpack/webpack) - A module bundler.
+* [Babel](https://github.com/babel/babel) - The compiler for writing next generation JavaScript.
 * [Simple Grid](https://github.com/zachacole/Simple-Grid) - A simple, lightweight CSS grid
 * [SweetAlert](https://github.com/t4t5/sweetalert) - A beautiful replacement for JavaScript's "alert"
