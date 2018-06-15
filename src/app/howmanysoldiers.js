@@ -1,6 +1,27 @@
+/* 
+A program to create a UI for solving the following math riddle:
+
+Soldiers must line up in rows of two. After the line-up, one soldier remains. 
+Even when competing in rows of three, four, five and six, one soldier remains. 
+Only when they line up in rows of seven, there is no soldier left. 
+The minimum number of soldiers needed must be determined.
+-----------------
+Copyright (C) 2018, Niklas Frick <niklas.frick@stud.htwchur.ch>
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
+
 import swal from 'sweetalert'
 
-// initialize global variable for current try and update display
+// initialize global variable for current number to try and initialize the display
 var currentNumber = 0
 updateCurrentNumber(currentNumber)
 
@@ -33,7 +54,11 @@ function updateCurrentNumber(newNumber) {
 	}
 }
 
-// reset function to reset everything back to the start (reload the page)
+// 
+// CLIENT functions
+// 
+
+// function to reset everything back to the start (reload the page)
 window.reset = function reset() {
 	document.location.reload(true)
 }
@@ -49,8 +74,8 @@ window.tryInput = function tryInput() {
 			button: "Okay"
 		})
 	} else if (isPositiveInteger(userInput)) {
-		// convert the input to a number - workaround
-		userInput = Number(userInput)
+		// because the input was a string, convert the input to a number 
+		userInput = parseInt(userInput)
 		updateCurrentNumber(userInput)
 		placeSoldiers(currentNumber, 2)
 		if(solutionIsCorrect(currentNumber)) {
@@ -109,6 +134,8 @@ window.guess = function guess(operation) {
 			break
 		case "s1":
 			// subtracting 1
+			// first check if the new number is 0 or below - if so just set the
+			// current number to 0
 			if (currentNumber - 1 <= 0) {
 				updateCurrentNumber(0)
 			} else {
@@ -126,6 +153,8 @@ window.guess = function guess(operation) {
 			break
 		case "s7":
 			// subtracting 7
+			// first check if the new number is 0 or below - if so just set the
+			// current number to 0
 			if (currentNumber - 7 <= 0) {
 				updateCurrentNumber(0)
 			} else {
@@ -144,7 +173,7 @@ window.guess = function guess(operation) {
 	}
 }
 
-// function for completing the riddle to the next higher or smaller solution
+// function for completing the riddle to the next higher or smaller solution depending on the current number
 window.nextsolution = function nextHigherSolution(option) {
 	let placeholderNumber
 	switch(option) {
@@ -192,8 +221,12 @@ window.nextsolution = function nextHigherSolution(option) {
 				}
 			}
 			break
-		}
+	}
 } 
+
+// 
+// Functions to display all the line ups of the soldiers
+//
 
 // function to place the soldiers in the rows of 2 to 7
 function placeSoldiers(amount, lineup) {
