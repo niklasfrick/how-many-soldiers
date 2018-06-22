@@ -23,7 +23,7 @@ What things you need to install the software
 1. clone repo & cd into it
 
 ```
-git clone https://github.com/soulwash/how-many-soldiers.git
+git clone https://github.com/niklasfrick/how-many-soldiers.git
 cd how-many-soldiers
 ```
 
